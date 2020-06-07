@@ -68,7 +68,8 @@ app.get("/api/robots", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
     } else {
-      res.status(200).json(docs);
+      res.status(200).json({"estatus": "si funciona"});
+      //res.status(200).json(docs);
     }
   });
 });
