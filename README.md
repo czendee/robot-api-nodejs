@@ -1,6 +1,22 @@
 #donde se indica que .js se usa para arancar  heroku es en ProcFile
 
 
+#nodejs api intiial
+#this repository is connected to Heroku 
+http://peaceful-retreat-91246.herokuapp.com/
+
+
+
+#the DB is configured in an environment variable in Heroku with the information for the db
+#heroku es
+#Imposible66
+
+#has autodeploy to heroku.
+Each time a file in the master is modified, it deploys it to heorku project
+
+Example http://peaceful-retreat-91246.herokuapp.com/api/robots
+
+
 # node-js-getting-started
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
