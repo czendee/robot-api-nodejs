@@ -1,0 +1,43 @@
+#donde se indica que .js se usa para arancar  heroku es en ProcFile
+
+
+
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes
+
+https://dotnetthoughts.net/performing-curd-operations-using-web-api/
+
+https://devcenter.heroku.com/articles/git#deploying-code  nooooo7
+
+
+https://devcenter.heroku.com/articles/mongolab
+
+queries api
+https://peaceful-retreat-91246.herokuapp.com/api/robots01
+https://peaceful-retreat-91246.herokuapp.com/api/robots
+https://peaceful-retreat-91246.herokuapp.com/api/comandosrobots
+
+test post
+https://www.hurl.it/
+
+jheroku login
+https://id.heroku.com/login
+
+https://stackoverflow.com/questions/12218552/mongodb-querying-for-multiple-parameters
+
+www.extremeprogramming.org/rules/refactor.html
+
+https://news.ycombinator.com/news?p=1
+
+
+mlab
+https://mlab.com/login/?r=%2Fdatabases%2Ftochi%2Fcollections%2Fcomandosrobots%3Fq%3D%26s%3D%26f%3D%26pageSize%3D10%26pageNum%3D2
+
+
+https://peaceful-retreat-91246.herokuapp.com/api/quiensoy/5ac6b0c7f36d285c360b90c6
+https://peaceful-retreat-91246.herokuapp.com/api/pos_traetodos
+https://peaceful-retreat-91246.herokuapp.com/api/pos_countrystore
+https://peaceful-retreat-91246.herokuapp.com/api/robotscambialonlat/balderillas/19.429893333333332/-99.150
+https://peaceful-retreat-91246.herokuapp.com/api/robothistorypendientes/revillagiGORobot
+https://peaceful-retreat-91246.herokuapp.com/api/robots01
+https://peaceful-retreat-91246.herokuapp.com/api/robots
+https://peaceful-retreat-91246.herokuapp.com/api/comandosrobots
