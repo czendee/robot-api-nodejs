@@ -1,4 +1,6 @@
-#donde se indica que .js se usa para arancar  heroku es en ProcFile
+# node-js  robot-api-node
+# mirar el wiki for lista de API
+
 
 
 #nodejs api intiial
