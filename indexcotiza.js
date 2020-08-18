@@ -5,7 +5,7 @@ var mongodb = require("mongodb");
 //2020 august START: user story 1 : token security
 var jwt = require('jsonwebtoken'); //authentication 2020 August: user story 1 token
 var config = require('./configs/config');//authentication 2020 August: user story 1 token
-//2020 august START : user story 1 : token security
+//2020 august START : user story 1 : token security.
 
 
 var ObjectID = mongodb.ObjectID;
