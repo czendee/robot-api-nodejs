@@ -20,6 +20,8 @@ var ROBOTS_TICKET_SALE_PRODSERV = "robots_ticket_prodserv";
 
 var BANWIRE_COTIZACIONES_COLLECTION = "banwirecotizaciones";
 
+var BANWIRE_COTIZACIONES_BITACORA_COLLECTION = "banwirebitacoras";
+
 
 //to use the api get/post for POS sale store
 var POS_PAIS = "storesales_coountry";
@@ -1048,10 +1050,22 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
    newCotiza.atributo3 = obj;
     console.log("guardando datos cotizacion 3.3");
     db.collection(BANWIRE_COTIZACIONES_COLLECTION).insertOne(newCotiza, function(err, doc) {
+      console.log("guardando datos cotizacion 4.1");
       if (err) {
         handleError(res, err.message, "Fallo crear nueva cotizacion.");
       } else {
-        res.status(201).json(doc.ops[0]);
+        console.log("guardando datos cotizacion 4.2");
+        //crete bitacora entry in the db for new cotizacion
+        var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"COTIZACION", "TODOS", "Nada","NUEVO");
+        console.log("guardando datos cotizacion 4.3");
+        if (resultado === "NO") {
+             handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
+        } else {//success
+            res.status(201).json(doc.ops[0]);
+         
+        }
+      console.log("guardando datos cotizacion 4.5");
+
       }
     });
     
@@ -1119,4 +1133,53 @@ app.get("/banwireapi/cotizacionescambiadosdatos/:nombre/:lat/:lon", function(req
   });
 });
 
+//////////////////////////////////////////////////////////////////////777
+//     BANWIRE_COTIZACIONES_BITACORA
+//////////////////////////luna
 
+
+/*  "/banwireapi/cotizaciones"
+ *    GET: finds all cotizaciones
+ *    POST: creates a new cotizacion
+ */
+
+// Generic add new bitacora entry.
+function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterior, parnuevo) {
+
+
+   console.log("guardando datos cotizacion bitacora 1");
+    var objbitacora = {
+            "idregistro": "20200800003",
+            "idcamporegistro": "numero",
+            "registrocambiado": "COTIZACION",
+            "fechahora": "90000",
+            "tipoevento": "creacion",
+            "usuario": "yotest01",
+            "idcampomodificado": "TODOS",
+            "valoranterior": "nada",
+            "valornuevo": "nuevo"
+   };
+   console.log("guardando datos cotizacion bitacora 2");  
+  obj.idregistro = paridregistro;
+  obj.idcampomodificado = campo;
+  obj.tipoevento = partipo;
+  obj.anterior = paranterior;
+  obj.nuevo = parnuevo;
+  
+
+   
+  console.log("guardando datos cotizacion bitacora 3");
+    db.collection(BANWIRE_COTIZACIONES_BITACORA_COLLECTION).insertOne(objbitacora, function(err, doc) {
+      if (err) {
+//           handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
+        return "NO";
+      } else {
+
+        return "SI";
+      }
+    });
+
+return "SI"
+
+
+}
