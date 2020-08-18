@@ -1037,16 +1037,19 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
   console.log("guardando datos cotizaciones 1");
   if (!req.body.name) {
     handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
-  }
-  console.log("guardando datos cotizacion 3");
+    console.log("guardando datos cotizacion 2: no se recibio el dato name, ni ningun otro");
+  }else{
+    console.log("guardando datos cotizacion 3");
 
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).insertOne(newCotiza, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Fallo crear nueva cotizacion.");
-    } else {
-      res.status(201).json(doc.ops[0]);
-    }
-  });
+    db.collection(BANWIRE_COTIZACIONES_COLLECTION).insertOne(newCotiza, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Fallo crear nueva cotizacion.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+    
+  }//end else
 });
 
 
