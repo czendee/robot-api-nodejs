@@ -1183,3 +1183,47 @@ return "SI"
 
 
 }
+
+/*  "/banwireapi/bitacoras"
+ *    GET: finds all bitacoras
+ */
+
+app.get("/banwireapi/bitacoras", function(req, res) {
+  db.collection(BANWIRE_COTIZACIONES_BITACORA_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener bitacoras.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
+/*  "/banwireapi/cotizaciones"
+ *    GET:  :name  finds all cotizaciones filtered by idregistro
+ *    GET:  :id  finds all cotizaciones filtered by registrocambiado
+ */
+
+
+
+app.get("/banwireapi/cotizaciones/:idregistro", function(req, res) {
+  console.log("consulta cotizaciones por registrocambiado 1 si");
+  db.collection(BANWIRE_COTIZACIONES_BITACORA_COLLECTION).find({ "idregistro": new ObjectID(req.params.idregistro) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizacion");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+app.get("/banwireapi/cotizaciones/:registrocambiado", function(req, res) {
+  console.log("consulta cotizaciones por registrocambiado 1 si");
+  db.collection(BANWIRE_COTIZACIONES_BITACORA_COLLECTION).find({ "registrocambiado": new ObjectID(req.params.registrocambiado) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizacion");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
