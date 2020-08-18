@@ -1160,11 +1160,11 @@ function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterio
             "valornuevo": "nuevo"
    };
    console.log("guardando datos cotizacion bitacora 2");  
-  obj.idregistro = paridregistro;
-  obj.idcampomodificado = campo;
-  obj.tipoevento = partipo;
-  obj.anterior = paranterior;
-  obj.nuevo = parnuevo;
+  objbitacora.idregistro = paridregistro;
+  objbitacora.idcampomodificado = campo;
+  objbitacora.tipoevento = partipo;
+  objbitacora.anterior = paranterior;
+  objbitacora.nuevo = parnuevo;
   
 
    
