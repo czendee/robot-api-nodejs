@@ -70,7 +70,66 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
+/*  "/autenticar"
+ *    POST: hacer la autentication y generar el token para que los otros servicios 
+ *          sean consumidos con el token  se esperan usuario y contrasena
+ *    User Story 1: token
+ *    2020 August
+ */
 
+app.post('/autenticar', (req, res) => {
+    if(req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+  const payload = {
+   check:  true
+  };
+  const token = jwt.sign(payload, app.get('llave'), {
+   expiresIn: 1440
+  });
+  res.json({
+   mensaje: 'AutentI saicación correcta',
+   token: token
+  });
+    } else {
+        res.json({ mensaje: "Usuario o contraseña incorrectos"})
+    }
+})
+
+/*  rutasProtegidas
+ *    definit las rutas y como se protegeran si es que se recibe el token de seguridad en el request
+ *    User Story 1: token
+ *    2020 August
+ */
+
+const rutasProtegidas = express.Router(); 
+rutasProtegidas.use((req, res, next) => {
+    const token = req.headers['access-token'];
+ 
+    if (token) {
+      jwt.verify(token, app.get('llave'), (err, decoded) => {      
+        if (err) {
+          return res.json({ mensaje: 'Token invalida' });    
+        } else {
+          req.decoded = decoded;    
+          next();
+        }
+      });
+    } else {
+      res.send({ 
+          mensaje: 'Token no proveida.' 
+      });
+    }
+ });
+
+
+app.get('/datos', rutasProtegidas, (req, res) => {
+ const datos = [
+  { id: 1, nombre: "Asfo" },
+  { id: 2, nombre: "Denisse" },
+  { id: 3, nombre: "Carlos" }
+ ];
+ 
+ res.json(datos);
+});
 
 /*  "/api/robots"
  *    GET: finds all robots
