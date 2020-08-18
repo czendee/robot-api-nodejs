@@ -1056,7 +1056,7 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
       } else {
         console.log("guardando datos cotizacion 4.2");
         //crete bitacora entry in the db for new cotizacion
-        var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"COTIZACION", "TODOS", "Nada","NUEVO");
+        var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"NUEVACOTIZACION", "TODOS", "Nada","NUEVO");
         console.log("guardando datos cotizacion 4.3");
         if (resultado === "NO") {
              handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
@@ -1163,8 +1163,8 @@ function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterio
   objbitacora.idregistro = paridregistro;
   objbitacora.idcampomodificado = campo;
   objbitacora.tipoevento = partipo;
-  objbitacora.anterior = paranterior;
-  objbitacora.nuevo = parnuevo;
+  objbitacora.valoranterior = paranterior;
+  objbitacora.valornuevo = parnuevo;
   
 
    
