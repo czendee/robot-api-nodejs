@@ -18,6 +18,8 @@ var ROBOTHISTORY_COLLECTION = "robothistory";
 var ROBOTS_USUARIO = "usuarios";
 var ROBOTS_TICKET_SALE_PRODSERV = "robots_ticket_prodserv";
 
+var BANWIRE_COTIZACIONES_COLLECTION = "banwirecotizaciones";
+
 
 //to use the api get/post for POS sale store
 var POS_PAIS = "storesales_coountry";
@@ -994,3 +996,118 @@ app.post("/api/pay_card_withdrawal", function(req, res) {
   console.log("pronabo lapotp fd x si");
   
 });
+
+/////////////////////////////////////////////////////////////////////77
+//////////// BANWIRE cotizaciones
+//////////////////////////////////////////////////////////////////////777
+//     BANWIRE_COTIZACIONES_COLLECTION
+//////////////////////////luna
+
+
+/*  "/banwireapi/cotizaciones"
+ *    GET: finds all cotizaciones
+ *    POST: creates a new cotizacion
+ */
+
+app.get("/banwireapi/cotizaciones", function(req, res) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizaciones.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/banwireapi/cotizaciones01", function(req, res) {
+
+  var query = { mediopago: "OXXO" };
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizaciones.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+ 
+app.post("/banwireapi/cotizaciones", function(req, res) {
+  var newCotiza = req.body;
+  console.log("guardando datos cotizaciones 1");
+  if (!req.body.name) {
+    handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
+  }
+  console.log("guardando datos cotizacion 3");
+
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).insertOne(newCotiza, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo crear nueva cotizacion.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+
+
+/*  "/banwireapi/cotizaciones"
+ *    GET:  :name  finds all cotizaciones filtered by name
+ *    GET:  :id  finds all cotizaciones filtered by id
+ *    GET:  :id  finds all cotizaciones filtered by id
+ *    POST: creates a new cotizacion
+ */
+
+
+app.get("/banwireapi/cotizaciones/:name", function(req, res) {
+  console.log("consulta cotizaciones por nombre 1 si");
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "name": new ObjectID(req.params.name) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizacion");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+//update 
+
+app.put("/banwireapi/cotizaciones/:id", function(req, res) {
+  var updateDoc = req.body;
+  delete updateDoc._id;
+
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo actualizar cotizacion");
+    } else {
+      updateDoc._id = req.params.id;
+      res.status(200).json(updateDoc);
+    }
+  });
+});
+
+app.delete("/banwireapi/cotizaciones/:id", function(req, res) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Fallo borrar cotizaciones");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
+app.get("/banwireapi/cotizacionescambiadosdatos/:nombre/:lat/:lon", function(req, res) {
+  var updateDoc = req.body;
+
+
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).updateOne({name: req.params.nombre}, {$set:{ lat: req.params.lat, lon:req.params.lon}}, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo actualizar  lon and lat");
+    } else {
+      updateDoc.nombre = req.params.nombre;
+      res.status(200).json(updateDoc);
+    }
+  });
+});
+
+
