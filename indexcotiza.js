@@ -1,6 +1,13 @@
 var express = require("express");//hola
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
+
+//2020 august START: user story 1 : token security
+var jwt = require('jsonwebtoken'); //authentication 2020 August: user story 1 token
+var config = require('./configs/config');//authentication 2020 August: user story 1 token
+//2020 august START : user story 1 : token security
+
+
 var ObjectID = mongodb.ObjectID;
 
 var ROBOTS_COLLECTION = "robots";
@@ -24,6 +31,13 @@ var POS_PRODSERV = "storesales_coontryprodserv";
 var PAY_ISSUER_LOYALTYCARD = "loyal_IssuerBank_LoyaltyCard";
 
 var app = express();
+
+//2020 august : user story 1 : token security
+// 1
+app.set('llave', config.llave);
+// 2
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
