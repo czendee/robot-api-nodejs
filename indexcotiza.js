@@ -22,6 +22,8 @@ var BANWIRE_COTIZACIONES_COLLECTION = "banwirecotizaciones";
 
 var BANWIRE_COTIZACIONES_BITACORA_COLLECTION = "banwirebitacoras";
 
+var BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION = "banwirebitacorasdescuento";
+
 
 //to use the api get/post for POS sale store
 var POS_PAIS = "storesales_coountry";
@@ -1057,6 +1059,8 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
         console.log("guardando datos cotizacion 4.2");
         //crete bitacora entry in the db for new cotizacion
         var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"NUEVACOTIZACION", "TODOS", "Nada","NUEVO");
+        var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, newCotiza.numero,"FIJO", newCotiza.datosdecostos.descuentovariabletipo,newCotiza.datosdecostos.descuentovariable);
+        var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, newCotiza.numero,"VARIABLE", newCotiza.datosdecostos.descuentofijotipo,newCotiza.datosdecostos.descuentofijo);
         console.log("guardando datos cotizacion 4.3");
         if (resultado === "NO") {
              handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
@@ -1148,10 +1152,7 @@ app.get("/banwireapi/cotizacionescambiadosdatos/:nombre/:lat/:lon", function(req
 //////////////////////////luna
 
 
-/*  "/banwireapi/cotizaciones"
- *    GET: finds all cotizaciones
- *    POST: creates a new cotizacion
- */
+
 
 // Generic add new bitacora entry.
 function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterior, parnuevo) {
@@ -1237,3 +1238,66 @@ app.get("/banwireapi/bitacoras/:registrocambiado", function(req, res) {
     }
   });
 });
+
+
+
+
+//////////////////////////////////////////////////////////////////////777
+//     BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION
+//////////////////////////luna
+
+
+
+// Generic add new bitacora descuentos entry.
+function handleSetNewBitacoraDescuentoEntry(res, paridregistro, parusuario, parfijovar, partipo,  parnuevo) {
+
+
+     console.log("guardando datos cotizacion descuento bitacora 1");
+      var objbitacora = {
+              "idregistro": "20200800003",
+              "fechahora": "90000",
+              "usuario": "test01",
+              "tipo": "PORCENTAJE",
+              "usuario": "yotest01",
+              "tipofijovariable": "FIJO",
+              "valornuevo": "nuevo"
+     };
+     console.log("guardando datos cotizacion bitacora descuento 2");  
+    objbitacora.idregistro = paridregistro;
+    objbitacora.usuario = parusuario;
+    objbitacora.tipo = partipo;
+    objbitacora.tipofijovariable = parfijovar;
+    objbitacora.valornuevo = parnuevo;
+
+
+   
+    console.log("guardando datos cotizacion bitacora  descuento 3");
+    db.collection(BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION).insertOne(objbitacora, function(err, doc) {
+      if (err) {
+//           handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
+        return "NO";
+      } else {
+
+        return "SI";
+      }
+    });
+
+    return "SI"
+
+
+}
+
+/*  "/banwireapi/bitacorasdescuento"
+ *    GET: finds all bitacoras de descuentos
+ */
+
+app.get("/banwireapi/bitacorasdescuento", function(req, res) {
+  db.collection(BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener bitacoras descuento.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
