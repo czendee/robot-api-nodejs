@@ -1060,11 +1060,13 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
         //crete bitacora entry in the db for new cotizacion
         var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"NUEVACOTIZACION", "TODOS", "Nada","NUEVO");
         var newDatoscostos = newCotiza.datosdecostos;
-        var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name,"FIJO", newDatoscostos.descuentovariabletipo, newDatoscostos.descuentovariable);
+        //var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name,"FIJO", newDatoscostos.descuentovariabletipo, newDatoscostos.descuentovariable);
+        var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name,"FIJO", "PORCENTAJE", "2.5");
         
-        //function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterior, parnuevo) {
+        
           
-        var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, "VARIABLE", newDatoscostos.descuentofijotipo, newDatoscostos.descuentofijo);
+        //var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, "VARIABLE", newDatoscostos.descuentofijotipo, newDatoscostos.descuentofijo);
+        var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, "VARIABLE", "MONTO", "3");
         
         //function handleSetNewBitacoraDescuentoEntry(res, paridregistro, parusuario, parfijovar, partipo,  parnuevo) {
           
