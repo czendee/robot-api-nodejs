@@ -1060,8 +1060,14 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
         //crete bitacora entry in the db for new cotizacion
         var resultado=  handleSetNewBitacoraEntry(res, newCotiza.numero,"NUEVACOTIZACION", "TODOS", "Nada","NUEVO");
         var newDatoscostos = newCotiza.datosdecostos;
-        var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, newCotiza.numero,"FIJO", newDatoscostos.descuentovariabletipo, newDatoscostos.descuentovariable);
-        var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, newCotiza.numero,"VARIABLE", newDatoscostos.descuentofijotipo, newDatoscostos.descuentofijo);
+        var resultadodescuentofijo = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name,"FIJO", newDatoscostos.descuentovariabletipo, newDatoscostos.descuentovariable);
+        
+        //function handleSetNewBitacoraEntry(res, paridregistro, partipo, campo,paranterior, parnuevo) {
+          
+        var resultadodescuentovariable = handleSetNewBitacoraDescuentoEntry(res, newCotiza.numero, newCotiza.name, "VARIABLE", newDatoscostos.descuentofijotipo, newDatoscostos.descuentofijo);
+        
+        //function handleSetNewBitacoraDescuentoEntry(res, paridregistro, parusuario, parfijovar, partipo,  parnuevo) {
+          
         console.log("guardando datos cotizacion 4.3");
         if (resultado === "NO") {
              handleError(res, err.message, "Fallo crear bitacora nueva cotizacion.");
