@@ -23,6 +23,7 @@ var BANWIRE_COTIZACIONES_COLLECTION = "banwirecotizaciones";
 var BANWIRE_COTIZACIONES_BITACORA_COLLECTION = "banwirebitacoras";
 
 var BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION = "banwirebitacorasdescuento";
+var BANWIRE_USUARIOS_COLLECTION = "banwireusuarios";
 
 
 //to use the api get/post for POS sale store
@@ -1310,3 +1311,80 @@ app.get("/banwireapi/bitacorasdescuento", function(req, res) {
   });
 });
 
+
+
+/////////////////////////////////////////////////////////////////////77
+//////////// BANWIRE usuarios
+//////////////////////////////////////////////////////////////////////777
+//     BANWIRE_USUARIOS_COLLECTION
+//////////////////////////luna
+
+
+/*  "/banwireapi/usuarios"
+ *    GET: finds all usuarios
+ *    POST: creates a new usuario
+ */
+
+app.get("/banwireapi/usuarios", function(req, res) {
+  db.collection(BANWIRE_USUARIOS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener usuarios.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/banwireapi/usuariosactivos", function(req, res) {
+
+  var query = { estatus: "ACTIVO" };
+  db.collection(BANWIRE_USUARIOS_COLLECTION).find(query).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener usuarios.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+ 
+app.post("/banwireapi/usuarios", function(req, res) {
+  var newCotiza = req.body;
+  console.log("guardando datos usuario 1");
+  if (!req.body.name) {
+    handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
+    console.log("guardando datos cotizacion 2: no se recibio el dato name, ni ningun otro");
+  }else{
+    console.log("guardando datos usuario 3.1");
+    db.collection(BANWIRE_USUARIOS_COLLECTION).insertOne(newCotiza, function(err, doc) {
+      console.log("guardando datos usuario 4.1");
+      if (err) {
+        handleError(res, err.message, "Fallo crear nueva usuario.");
+      } else {
+            res.status(201).json(doc.ops[0]);        
+      }
+    });
+    
+  }//end else
+});
+
+
+
+/*  "/banwireapi/cotizaciones"
+ *    GET:  :name  finds all cotizaciones filtered by name
+ *    GET:  :id  finds all cotizaciones filtered by id
+ *    GET:  :id  finds all cotizaciones filtered by id
+ *    POST: creates a new cotizacion
+ */
+
+
+app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
+  console.log("consulta cotizaciones por numero 1 si");
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "name": new ObjectID(req.params.numero) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizacion");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
