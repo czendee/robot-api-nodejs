@@ -1370,19 +1370,16 @@ app.post("/banwireapi/usuarios", function(req, res) {
 
 
 
-/*  "/banwireapi/cotizaciones"
- *    GET:  :name  finds all cotizaciones filtered by name
- *    GET:  :id  finds all cotizaciones filtered by id
- *    GET:  :id  finds all cotizaciones filtered by id
- *    POST: creates a new cotizacion
+/*  "/banwireapi/usuarios"
+ *    GET:  :numero  finds all usuarios filtered by name
  */
 
 
-app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
-  console.log("consulta cotizaciones por numero 1 si");
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "name": new ObjectID(req.params.numero) }, function(err, doc) {
+app.get("/banwireapi/cotizaciones/:usuario", function(req, res) {
+  console.log("consulta usuario por numero 1 si");
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "usuario": new ObjectID(req.params.usuario) }, function(err, doc) {
     if (err) {
-      handleError(res, err.message, "Fallo obtener cotizacion");
+      handleError(res, err.message, "Fallo obtener usuario");
     } else {
       res.status(200).json(doc);
     }
