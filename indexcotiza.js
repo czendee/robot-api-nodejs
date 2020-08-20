@@ -1377,7 +1377,7 @@ app.post("/banwireapi/usuarios", function(req, res) {
 
 app.get("/banwireapi/cotizaciones/:usuario", function(req, res) {
   console.log("consulta usuario por numero 1 si");
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "usuario": new ObjectID(req.params.usuario) }, function(err, doc) {
+  db.collection(BANWIRE_USUARIOS_COLLECTION).find({ "usuario": new ObjectID(req.params.usuario) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Fallo obtener usuario");
     } else {
