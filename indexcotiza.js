@@ -101,6 +101,35 @@ app.post('/autenticar', (req, res) => {
     }
 })
 
+
+/*  "/autenticarusuario"
+ *    POST: hacer la autentication y generar el token para que los otros servicios 
+ *          sean consumidos con el token  se esperan usuario y contrasena
+ *    User Story 1: token
+ *    2020 August
+ */
+
+app.post('/autenticarusuario', (req, res) => {
+  var resultado01 = handleCheckUsuario(res, req.body.usuario, req.body.contrasena)
+  
+   //if(req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+  if(resultado01 === "SI") {
+       const payload = {
+           check:  true
+       };
+       const token = jwt.sign(payload, app.get('llave'), {
+           expiresIn: 1440
+       });
+       res.json({
+           mensaje: 'AutentI saicación correcta',
+           token: token
+       });
+    } else {
+        res.json({ mensaje: "Usuario o contraseña incorrectos"})
+    }
+})
+
+
 /*  rutasProtegidas
  *    definit las rutas y como se protegeran si es que se recibe el token de seguridad en el request
  *    User Story 1: token
@@ -1385,3 +1414,25 @@ app.get("/banwireapi/cotizaciones/:usuario", function(req, res) {
     }
   });
 });
+
+
+// Generic add new bitacora entry.
+function handleCheckUsuario(res, userio, contrasena) {
+
+
+   console.log("handleCheckUsuario 1");
+   console.log("handleCheckUsuario  usuario:"+userio);
+   console.log("handleCheckUsuario pass:"+contrasena);
+    db.collection(BANWIRE_USUARIOS_COLLECTION).find({ "usuario": new ObjectID(userio)  }, function(err, doc) {
+      if (err) {
+        return "NO";
+      } else {
+
+        return "SI";
+      }
+  });
+
+return "NO"
+
+
+}
