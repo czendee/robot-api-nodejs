@@ -1423,7 +1423,7 @@ function handleCheckUsuario(res, userio, contrasena) {
    console.log("handleCheckUsuario 1");
    console.log("handleCheckUsuario  usuario:"+userio);
    console.log("handleCheckUsuario pass:"+contrasena);
-    db.collection(BANWIRE_USUARIOS_COLLECTION).find({ "usuario": new ObjectID(userio)  }, function(err, doc) {
+    db.collection(BANWIRE_USUARIOS_COLLECTION).find({ "usuario": userio  }, function(err, doc) {
       if (err) {
         return "NO";
       } else {
