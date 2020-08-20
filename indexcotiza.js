@@ -1419,7 +1419,7 @@ app.get("/banwireapi/cotizaciones/:usuario", function(req, res) {
 // Generic add new bitacora entry.
 function handleCheckUsuario(res, userio, contrasena) {
 
-
+   var respuesta ="NO";
    console.log("handleCheckUsuario 1");
    console.log("handleCheckUsuario  usuario:"+userio);
    console.log("handleCheckUsuario pass:"+contrasena);
@@ -1427,14 +1427,14 @@ function handleCheckUsuario(res, userio, contrasena) {
       console.log("handleCheckUsuario 2");
       if (err) {
         console.log("handleCheckUsuario 3 no");
-        return "NO";
+        respuesta = "NO";
       } else {
         console.log("handleCheckUsuario 4  si");
-        return "SI";
+        respuesta = "SI";
       }
   });
 console.log("handleCheckUsuario 5");
-return "NO"
+return respuesta;
 
 
 }
