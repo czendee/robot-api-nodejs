@@ -176,7 +176,7 @@ app.get('/datos', rutasProtegidas, (req, res) => {
 app.get("/banwireapi/traepdf", function(req, res) {
   console.log("trae pdf 1 si");
   var query = { numero:"20200800007" };
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, doc) {
      console.log("trae pdf 2 si");
 //  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": new ObjectID(req.params.cualcotizacion) }, function(err, doc) {
     if (err) {
