@@ -167,6 +167,75 @@ app.get('/datos', rutasProtegidas, (req, res) => {
  res.json(datos);
 });
 
+/*  "/banwireapi/traepdf"
+ *    POST: creates a new robot
+ */
+
+
+app.get("/banwireapi/traepdf/:cualcotizacion", function(req, res) {
+  console.log("trae pdf 1 si");
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": new ObjectID(req.params.cualcotizacion) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizacion para pdf");
+    } else {
+      var nombre = doc.name;
+      var ejecutivo = doc.ejecutivo;
+      var status = doc.status;        
+      var PDFDocument = require('pdfkit');
+
+      var pdf = new PDFDocument({        
+        layout: 'landscape',
+        size: [210, 210], 
+        margin: 5,     
+        info: {    
+           Title: 'Recibo de agua potable',
+           Author: 'Comite de agua potable 2018',
+        }  
+      })
+      
+         // Write stuff into PDF
+    pdf.moveDown()
+         .fillColor('black')
+         .fontSize(7)
+         .text('EJEMPLO DE DOCUMENTO PDF', {
+           align: 'center',
+           indent: 2,
+           height: 2,
+           ellipsis: true
+         });
+         
+
+    pdf.moveDown()
+         .fillColor('black')
+         .fontSize(7)
+         .text('NOMBRE DE PERSONAS DESDE FORMULARIO', {
+           align: 'center',
+           indent: 2,
+           height: 2,
+           ellipsis: true
+         });
+          
+
+
+     pdf.moveDown()
+         .fillColor('black')
+         .fontSize(8)
+         .text('NOMBRE: '+nombre+' '+ ejecutivo +' '+ status , {
+           align: 'left',
+           indent: 2,
+           height: 2,
+           ellipsis: true
+         });
+      
+      pdf.pipe(res);
+      pdf.end();
+      
+      //res.status(200).json(doc);
+    }
+  });
+  
+
+
 /*  "/api/robots"
  *    GET: finds all robots
  *    POST: creates a new robot
