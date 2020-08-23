@@ -176,19 +176,12 @@ app.get('/datos', rutasProtegidas, (req, res) => {
 app.get("/banwireapi/traepdf", function(req, res) {
   console.log("trae pdf 1 si");
   var query = { numero:"20200800007" };
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, doc) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
      console.log("trae pdf 2 si");
 //  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": new ObjectID(req.params.cualcotizacion) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizacion para pdf");
     } else {
-        var docjson = json(doc);
-        var nombre = docjson.name;
-        var ejecutivo = docjson.ejecutivo;
-        var status = docjson.status;        
-        console.log("trae pdf 3 si:"+nombre);
-        console.log("trae pdf 3 si:"+ejecutivo);
-        console.log("trae pdf 3 si:"+status);
         var PDFDocument = require('pdfkit');
 
         var pdf = new PDFDocument({        
@@ -223,17 +216,25 @@ app.get("/banwireapi/traepdf", function(req, res) {
                ellipsis: true
              });
           
+            docs.forEach(function(doc) {
+                console.log(doc.name + " is a " + doc.category_code + " company.");
+              
+               var nombre = doc.name;
+               var ejecutivo = doc.ejecutivo;
+               var status = doc.status;        
+               pdf.moveDown()
+                   .fillColor('black')
+                   .fontSize(8)
+                   .text('NOMBRE: '+nombre+' '+ ejecutivo +' '+ status , {
+                     align: 'left',
+                     indent: 2,
+                     height: 2,
+                     ellipsis: true
+               });//pdf down
 
+              
+            });//for each
 
-         pdf.moveDown()
-             .fillColor('black')
-             .fontSize(8)
-             .text('NOMBRE: '+nombre+' '+ ejecutivo +' '+ status , {
-               align: 'left',
-               indent: 2,
-               height: 2,
-               ellipsis: true
-             });
       
           pdf.pipe(res);
           pdf.end();
