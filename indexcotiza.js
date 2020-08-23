@@ -172,7 +172,8 @@ app.get('/datos', rutasProtegidas, (req, res) => {
  */
 
 
-app.get("/banwireapi/traepdf/:cualcotizacion", function(req, res) {
+//app.get("/banwireapi/traepdf/:cualcotizacion", function(req, res) {
+app.get("/banwireapi/traepdf", function(req, res) {
   console.log("trae pdf 1 si");
   db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": new ObjectID(req.params.cualcotizacion) }, function(err, doc) {
     if (err) {
