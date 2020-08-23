@@ -185,6 +185,9 @@ app.get("/banwireapi/traepdf", function(req, res) {
         var nombre = doc.name;
         var ejecutivo = doc.ejecutivo;
         var status = doc.status;        
+        console.log("trae pdf 3 si:"+nombre);
+        console.log("trae pdf 3 si:"+ejecutivo);
+        console.log("trae pdf 3 si:"+status);
         var PDFDocument = require('pdfkit');
 
         var pdf = new PDFDocument({        
