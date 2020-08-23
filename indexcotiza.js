@@ -182,9 +182,10 @@ app.get("/banwireapi/traepdf", function(req, res) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizacion para pdf");
     } else {
-        var nombre = doc.name;
-        var ejecutivo = doc.ejecutivo;
-        var status = doc.status;        
+        var docjson = json(doc);
+        var nombre = docjson.name;
+        var ejecutivo = docjson.ejecutivo;
+        var status = docjson.status;        
         console.log("trae pdf 3 si:"+nombre);
         console.log("trae pdf 3 si:"+ejecutivo);
         console.log("trae pdf 3 si:"+status);
