@@ -312,7 +312,7 @@ app.post("/api/robots", function(req, res) {
 });
 
 
-Access-Control-Allow-Origin: http://foo.example
+//https://youtochisocio.herokuapp.com/
 app.post("/api/robots101", function(req, res) {
   var newRobot = req.body;
   console.log("guardando datos 10 si");
