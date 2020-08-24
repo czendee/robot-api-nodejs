@@ -321,7 +321,7 @@ app.get("/api/robots101", function(req, res) {
     } else {
       //res.status(200).json({"estatus": "si funciona"});
           // Website you wish to allow to connect
-      res.setHeader('Access-Control-Allow-Origin', 'https://youtochisocio.herokuapp.com/');
+      res.setHeader('Access-Control-Allow-Origin', '*');
 
       // Request methods you wish to allow
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
