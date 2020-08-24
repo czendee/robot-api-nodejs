@@ -312,6 +312,38 @@ app.post("/api/robots", function(req, res) {
 });
 
 
+Access-Control-Allow-Origin: http://foo.example
+app.post("/api/robots101", function(req, res) {
+  var newRobot = req.body;
+  console.log("guardando datos 10 si");
+  if (!req.body.name) {
+    handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
+  }
+  console.log("guardando datos 3");
+
+  db.collection(ROBOTS_COLLECTION).insertOne(newRobot, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new robot.");
+    } else {
+          // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', 'https://youtochisocio.herokuapp.com/');
+
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+      // Request headers you wish to allow
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+      // Set to true if you need the website to include cookies in the requests sent
+      // to the API (e.g. in case you use sessions)
+      res.setHeader('Access-Control-Allow-Credentials', true);
+
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+
 /*  "/api/robots/:id"
  *    GET: find robot by id
  *    PUT: update robot by id
