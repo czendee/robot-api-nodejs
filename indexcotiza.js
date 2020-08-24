@@ -189,8 +189,8 @@ app.get("/banwireapi/traepdf", function(req, res) {
           size: [210, 210], 
           margin: 5,     
           info: {    
-             Title: 'Recibo de agua potable',
-             Author: 'Comite de agua potable 2018',
+             Title: 'Cotizacion Banwire',
+             Author: 'Youtochi 2020',
           }  
         });
       
@@ -198,7 +198,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
         pdf.moveDown()
              .fillColor('black')
              .fontSize(7)
-             .text('EJEMPLO DE DOCUMENTO PDF', {
+             .text('COTIZACION BANWIRE CLIENTE PLAN PREFERENCIAL', {
                align: 'center',
                indent: 2,
                height: 2,
@@ -209,7 +209,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
         pdf.moveDown()
              .fillColor('black')
              .fontSize(7)
-             .text('NOMBRE DE PERSONAS DESDE FORMULARIO', {
+             .text('Cliente', {
                align: 'center',
                indent: 2,
                height: 2,
@@ -231,8 +231,26 @@ app.get("/banwireapi/traepdf", function(req, res) {
                      height: 2,
                      ellipsis: true
                });//pdf down
+               pdf.moveDown()
+                   .fillColor('black')
+                   .fontSize(8)
+                   .text('Ejecutivo: '+ ejecutivo +' ', {
+                     align: 'left',
+                     indent: 2,
+                     height: 2,
+                     ellipsis: true
+               });//pdf down
 
-              
+               pdf.moveDown()
+                   .fillColor('black')
+                   .fontSize(8)
+                   .text('Estatus Cotizacion: '+ status , {
+                     align: 'left',
+                     indent: 2,
+                     height: 2,
+                     ellipsis: true
+               });//pdf down
+
             });//for each
 
       
