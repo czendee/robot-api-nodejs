@@ -178,7 +178,8 @@ app.get("/banwireapi/traepdf", function(req, res) {
   var query = { numero:"20200800008" };
 //  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
      console.log("trae pdf 2 si");
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": req.params.cualcotizacion }, function(err, docs) {
+  var cualvalue = parseInt(req.params.cualcotizacion);
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "numero": cualvalue }, function(err, docs) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizacion para pdf");
     } else {
