@@ -313,18 +313,13 @@ app.post("/api/robots", function(req, res) {
 
 
 //https://youtochisocio.herokuapp.com/
-app.post("/api/robots101", function(req, res) {
-  var newRobot = req.body;
-  console.log("guardando datos 10 si");
-  if (!req.body.name) {
-    handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
-  }
-  console.log("guardando datos 3");
 
-  db.collection(ROBOTS_COLLECTION).insertOne(newRobot, function(err, doc) {
+app.get("/api/robots101", function(req, res) {
+  db.collection(ROBOTS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to create new robot.");
+      handleError(res, err.message, "Failed to get contacts.");
     } else {
+      //res.status(200).json({"estatus": "si funciona"});
           // Website you wish to allow to connect
       res.setHeader('Access-Control-Allow-Origin', 'https://youtochisocio.herokuapp.com/');
 
@@ -337,11 +332,12 @@ app.post("/api/robots101", function(req, res) {
       // Set to true if you need the website to include cookies in the requests sent
       // to the API (e.g. in case you use sessions)
       res.setHeader('Access-Control-Allow-Credentials', true);
-
-      res.status(201).json(doc.ops[0]);
+      
+      res.status(200).json(docs);
     }
   });
 });
+
 
 
 /*  "/api/robots/:id"
