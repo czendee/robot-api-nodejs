@@ -1564,3 +1564,35 @@ return respuesta;
 
 
 }
+
+
+/*  "/banwireapi/cotizaciones"
+ *    GET: finds all cotizaciones
+ *    POST: creates a new cotizacion
+ */
+
+app.get("/banwireapi/cotizaciones101", function(req, res) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener cotizaciones.");
+    } else {
+
+          // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+      // Request headers you wish to allow
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+      // Set to true if you need the website to include cookies in the requests sent
+      // to the API (e.g. in case you use sessions)
+      res.setHeader('Access-Control-Allow-Credentials', true);      
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
+
