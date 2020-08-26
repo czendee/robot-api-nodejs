@@ -208,8 +208,18 @@ app.get("/banwireapi/traepdf", function(req, res) {
            .text('Here is some vector graphics...', 100, 100);
       
             // Scale proprotionally to the specified width
-        pdf.image('si.jpg', 0, 15, {width: 300})
+        pdf.image(config.pdfpage01, 0, 15, {width: 300})
    .text('Proportional to width', 0, 0);
+
+              // Add another page//////////////////////////////////////////////////////////// Page 02
+        pdf.addPage()
+           .fontSize(25)
+           .text('Here is some vector graphics...', 100, 100);
+      
+            // Scale proprotionally to the specified width
+        pdf.image(config.pdfpage02, 0, 15, {width: 300})
+   .text('Proportional to width', 0, 0);
+
       
       // Add another page//////////////////////////////////////////////////////////// Page 03
         pdf.addPage()
@@ -282,7 +292,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
              .text('Here is some vector graphics...', 100, 100);
       
             // Scale proprotionally to the specified width
-          pdf.image('si.jpg', 0, 15, {width: 300})
+          pdf.image(config.pdfpage03, 0, 15, {width: 300})
      .text('Proportional to width', 0, 0);
             pdf.pipe(res);
             pdf.end();
