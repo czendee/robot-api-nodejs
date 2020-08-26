@@ -287,7 +287,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
                });//pdf down
                  //// table with the costos
               
-                  var costosarray = doc.costos;        
+                  var costosarray = doc.costo;        
                   costosarray.forEach(function(costito) {
                         console.log(costito.mediodepago + " is a " + costito.comisionvariable + " company." +costito.comisionvariabletipo);
                         console.log(costito.mediodepago + " is a " + costito.comisionfija + " company." +costito.comisionfijatipo);
