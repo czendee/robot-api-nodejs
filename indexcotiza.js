@@ -247,6 +247,9 @@ app.get("/banwireapi/traepdf", function(req, res) {
                height: 2,
                ellipsis: true
              });
+       //display a rectangle
+          pdf.rect(45, 165, 240, 22).fillAndStroke('#ddd', '#000');
+          pdf.fill('#F00').stroke();
           
             docs.forEach(function(doc) {
                 console.log(doc.name + " is a " + doc.category_code + " company.");
