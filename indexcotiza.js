@@ -285,8 +285,29 @@ app.get("/banwireapi/traepdf", function(req, res) {
                      height: 2,
                      ellipsis: true
                });//pdf down
+                 //// table with the costos
+              
+                  var costosarray = doc.costos;        
+                  costosarray.forEach(function(costito) {
+                        console.log(costito.mediodepago + " is a " + costito.comisionvariable + " company." +costito.comisionvariabletipo);
+                        console.log(costito.mediodepago + " is a " + costito.comisionfija + " company." +costito.comisionfijatipo);
 
-            });//for each
+                       var mediodepago = costito.mediodepago;
+                       var variablo = costito.comisionvariable;
+                       var fija = costito.comisionfija;     
+                                   pdf.moveDown()
+                                     .fillColor('black')
+                                     .fontSize(8)
+                                     .text('[: '+ mediodepago + '       '+ variablo + '    '+fija , {
+                                       align: 'left',
+                                       indent: 2,
+                                       height: 2,
+                                       ellipsis: true
+                                 });//pdf down
+
+                    
+                  });//for each costos
+            });//for each  document/cotizacion
 
       
               // Add another page//////////////////////////////////////////////////////////// Page 04
