@@ -200,6 +200,12 @@ app.get("/banwireapi/traepdf", function(req, res) {
         pdf.image('si.jpg', 0, 15, {width: 300})
    .text('Proportional to width', 0, 0);
       
+      
+        // Add another page////////////////////////////////////////////////////////////
+        pdf.addPage()
+           .fontSize(25)
+           .text('Here is some vector graphics...', 100, 100);
+      
          // Write stuff into PDF
         pdf.moveDown()
              .fillColor('black')
