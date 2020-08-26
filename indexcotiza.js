@@ -288,12 +288,20 @@ app.get("/banwireapi/traepdf", function(req, res) {
                  //// table with the costos
                   var costosarray = [{"art":"A","count":"0"},{"art":"B","count":"1"}];      
                   costosarray = doc.costo;        
+              
+              var objectKeysArray = Object.keys(doc.costo)
+                  objectKeysArray.forEach(function(objKey) {
+                      var objValue = yourJsonObj[objKey]
+                      console.log(objValue);
+                  })
+              /*
                   costosarray.forEach(function(costito) {
                         console.log(costito.mediodepago + " is a " + costito.comisionvariable + " company." +costito.comisionvariabletipo);
                         console.log(costito.mediodepago + " is a " + costito.comisionfija + " company." +costito.comisionfijatipo);
 
                        var mediodepago = costito.mediodepago;
                        var variablo = costito.comisionvariable;
+                                      
                        var fija = costito.comisionfija;     
                                    pdf.moveDown()
                                      .fillColor('black')
@@ -303,10 +311,9 @@ app.get("/banwireapi/traepdf", function(req, res) {
                                        indent: 2,
                                        height: 2,
                                        ellipsis: true
-                                 });//pdf down
-
-                    
+                                 });//pdf down                    
                   });//for each costos
+                  */
             });//for each  document/cotizacion
 
       
