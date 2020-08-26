@@ -287,13 +287,15 @@ app.get("/banwireapi/traepdf", function(req, res) {
                });//pdf down
                  //// table with the costos
                   var costosarray = [{"art":"A","count":"0"},{"art":"B","count":"1"}];      
-                  costosarray = doc.costo;        
-              
+                  costosarray = doc.costo;
+               console.log(costosarray);
+        /*              
               var objectKeysArray = Object.keys(doc.costo)
                   objectKeysArray.forEach(function(objKey) {
                       var objValue = yourJsonObj[objKey]
                       console.log(objValue);
                   })
+                  */
               /*
                   costosarray.forEach(function(costito) {
                         console.log(costito.mediodepago + " is a " + costito.comisionvariable + " company." +costito.comisionvariabletipo);
