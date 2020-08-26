@@ -292,8 +292,9 @@ app.get("/banwireapi/traepdf", function(req, res) {
              .text('Here is some vector graphics...', 100, 100);
       
             // Scale proprotionally to the specified width
-          pdf.image(config.pdfpage03, 0, 15, {width: 300})
+          pdf.image(config.pdfpage04, 0, 15, {width: 300})
      .text('Proportional to width', 0, 0);
+      
             pdf.pipe(res);
             pdf.end();
 
