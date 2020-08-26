@@ -187,13 +187,18 @@ app.get("/banwireapi/traepdf", function(req, res) {
 
         var pdf = new PDFDocument({        
           layout: 'landscape',
-          size: [210, 210], 
+//          size: [210, 210], 
+          size: [450, 350],           
           margin: 5,     
           info: {    
              Title: 'Cotizacion Banwire',
              Author: 'Youtochi 2020',
           }  
         });
+      
+      // Scale proprotionally to the specified width
+        pdf.image('si.jpg', 0, 15, {width: 300})
+   .text('Proportional to width', 0, 0);
       
          // Write stuff into PDF
         pdf.moveDown()
