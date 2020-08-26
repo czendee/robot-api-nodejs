@@ -196,12 +196,22 @@ app.get("/banwireapi/traepdf", function(req, res) {
           }  
         });
       
+      // Add another page//////////////////////////////////////////////////////////// Page 01
       // Scale proprotionally to the specified width
         pdf.image('si.jpg', 0, 15, {width: 300})
    .text('Proportional to width', 0, 0);
       
       
-        // Add another page////////////////////////////////////////////////////////////
+        // Add another page//////////////////////////////////////////////////////////// Page 02
+        pdf.addPage()
+           .fontSize(25)
+           .text('Here is some vector graphics...', 100, 100);
+      
+            // Scale proprotionally to the specified width
+        pdf.image('si.jpg', 0, 15, {width: 300})
+   .text('Proportional to width', 0, 0);
+      
+      // Add another page//////////////////////////////////////////////////////////// Page 03
         pdf.addPage()
            .fontSize(25)
            .text('Here is some vector graphics...', 100, 100);
@@ -266,8 +276,16 @@ app.get("/banwireapi/traepdf", function(req, res) {
             });//for each
 
       
-          pdf.pipe(res);
-          pdf.end();
+              // Add another page//////////////////////////////////////////////////////////// Page 04
+          pdf.addPage()
+             .fontSize(25)
+             .text('Here is some vector graphics...', 100, 100);
+      
+            // Scale proprotionally to the specified width
+          pdf.image('si.jpg', 0, 15, {width: 300})
+     .text('Proportional to width', 0, 0);
+            pdf.pipe(res);
+            pdf.end();
 
           //res.status(200).json(doc);
       }//end else
