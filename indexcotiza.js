@@ -413,7 +413,7 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
             res.setHeader('Access-Control-Allow-Origin', '*');
 
             // Request methods you wish to allow
-            res.setHeader('Access-Control-Allow-Methods', 'GET');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
 
             // Request headers you wish to allow
             res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
