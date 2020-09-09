@@ -372,7 +372,11 @@ app.get("/banwireapi/cotizaciones01", function(req, res) {
  
 app.post("/banwireapi/cotizaciones", function(req, res) {
   var newCotiza = req.body;
-  console.log("guardando datos cotizaciones 1");
+  
+  console.log("guardando datos cotizaciones 1.1");
+  var quemando = JSON.stringify(newCotiza);
+  console.log("guardando datos cotizaciones 1.2");
+  console.log("guardando datos cotizaciones 1.3:"+quemando);
   if (!req.body.name) {
     handleError(res, "Ni le atinaste", "Manda su apelativo.", 400);
     console.log("guardando datos cotizacion 2: no se recibio el dato name, ni ningun otro");
