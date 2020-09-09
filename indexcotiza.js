@@ -470,7 +470,7 @@ app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
         });
 
       }else{
-        handleError(res, "NO se pasaron filtros, "No parameters passed.");
+        handleError(res, "NO se pasaron filtros", "No parameters passed.");
       }
 
  
