@@ -438,19 +438,42 @@ app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
   });
 });
 
-app.get("/banwireapi/cotizacionesbynumero2/:numero", function(req, res) {
-  console.log("consulta cotizaciones por numero 1 si");
-     var query = { numero: req.params.numero };
-  
-    console.log("consulta cotizaciones sera :"+req.params.numero );
-    db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Fallo obtener cotizaciones.");
-        } else {
-          res.status(200).json(docs);
-        }
-    });
+    app.get("/banwireapi/cotizacionesbynumero2/:numero/:name/:ejecutivo", function(req, res) {
+      console.log("consulta cotizaciones por numero 1 si");
+      var query = {};
+      var algo=0;
+      if(req.params.numero  !='NADA'){
+         query.numero =  req.params.numero;
+        console.log("consulta cotizaciones sera 1 :"+req.params.numero );
+        algo =1;
+      }
+      if(req.params.name  !='NADA'){
+         query.name =  req.params.name;
+        console.log("consulta cotizaciones sera 2 :"+req.params.name);
+            algo =1;
+      } 
+      if(req.params.ejecutivo  !='NADA'){
+         query.ejecutivo =  req.params.ejecutivo;
+        console.log("consulta cotizaciones sera 3 :"+req.params.ejecutivo );
+            algo =1;
+      } 
+      if (algo ==1){
+        
+        var strquery =JSON.stringify(query);
+        console.log("consulta cotizaciones filtrara por :"+strquery );
+        db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
+            if (err) {
+              handleError(res, err.message, "Fallo obtener cotizaciones.");
+            } else {
+              res.status(200).json(docs);
+            }
+        });
 
+      }else{
+        handleError(res, err.message, "No parameters passed.");
+      }
+
+ 
   
 });
 
