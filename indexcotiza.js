@@ -438,11 +438,11 @@ app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
   });
 });
 
-app.get("/banwireapi/cotizacionesbynumero", function(req, res) {
+app.get("/banwireapi/cotizacionesbynumero2/:numero", function(req, res) {
   console.log("consulta cotizaciones por numero 1 si");
      var query = { numero: req.params.numero };
   
-    console.log("consulta cotizaciones:"+req.params.numero );
+    console.log("consulta cotizaciones sera :"+req.params.numero );
     db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Fallo obtener cotizaciones.");
