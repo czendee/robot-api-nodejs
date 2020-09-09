@@ -369,7 +369,10 @@ app.get("/banwireapi/cotizaciones01", function(req, res) {
   });
 });
 
- 
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}))
+
 app.post("/banwireapi/cotizaciones", function(req, res) {
   var newCotiza = req.body;
   
