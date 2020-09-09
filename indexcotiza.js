@@ -417,6 +417,7 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
 
 app.get("/banwireapi/cotizaciones/:name", function(req, res) {
   console.log("consulta cotizaciones por nombre 1 si");
+ 
   db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({ "name": req.params.name }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizacion");
@@ -440,6 +441,8 @@ app.get("/banwireapi/cotizaciones/:numero", function(req, res) {
 app.get("/banwireapi/cotizacionesbynumero", function(req, res) {
   console.log("consulta cotizaciones por numero 1 si");
      var query = { numero: req.params.numero };
+  
+    console.log("consulta cotizaciones:"+req.params.numero );
     db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Fallo obtener cotizaciones.");
