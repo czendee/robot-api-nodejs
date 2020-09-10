@@ -429,8 +429,9 @@ app.post("/banwireapi/cotizaciones", function(req, res) {
             // to the API (e.g. in case you use sessions)
             res.setHeader('Access-Control-Allow-Credentials', true); 
 
-            console.log("guardando datos cotizacion 4.4.1");    
-            res.status(200).json(doc.ops[0]);
+            console.log("guardando datos cotizacion 4.4.1");  
+            res.sendStatus(200);
+//            res.status(200).json(doc.ops[0]);
             console.log("guardando datos cotizacion 4.4.2");    
          
         }
