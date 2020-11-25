@@ -360,7 +360,11 @@ app.get("/banwireapi/cotizaciones", function(req, res) {
 app.get("/banwireapi/cotizaciones01", function(req, res) {
 
   var query = { mediopago: "OXXO" };
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {
+   const collectionmia = db.collection(BANWIRE_COTIZACIONES_COLLECTION);
+  // Find some documents
+  collectionmia.find(query).toArray(function(err, docs) {
+//  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {  
+  
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizaciones.");
     } else {
