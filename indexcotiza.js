@@ -339,7 +339,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
  */
 
 app.get("/banwireapi/cotizaciones", function(req, res) {
-  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
+  db02.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizaciones.");
     } else {
