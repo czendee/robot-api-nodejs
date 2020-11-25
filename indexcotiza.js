@@ -45,9 +45,9 @@ mongodb.MongoClient.connect(process.env.PROD_MONGODB, function (err, database) {
  
   // Save database object from the callback for reuse.
  console.log("Database connection ready");
-  db = database;
+  db02 = database;
   console.log("Database connection ready 02");
-  db02 = database.db(dbName);
+  db = database.db(dbName);
   // Initialize the app.
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
@@ -339,7 +339,7 @@ app.get("/banwireapi/traepdf", function(req, res) {
  */
 
 app.get("/banwireapi/cotizaciones", function(req, res) {
-  db02.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Fallo obtener cotizaciones.");
     } else {
@@ -365,7 +365,7 @@ app.get("/banwireapi/cotizaciones", function(req, res) {
 app.get("/banwireapi/cotizaciones01", function(req, res) {
 
   var query = { mediopago: "OXXO" };
-   const collectionmia = db02.collection(BANWIRE_COTIZACIONES_COLLECTION);
+   const collectionmia = db.collection(BANWIRE_COTIZACIONES_COLLECTION);
   // Find some documents
   collectionmia.find(query).toArray(function(err, docs) {
 //  db.collection(BANWIRE_COTIZACIONES_COLLECTION).find(query).toArray(function(err, docs) {  
