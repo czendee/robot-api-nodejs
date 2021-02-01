@@ -50,6 +50,10 @@ app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
+var db02;
+
+// Database Name
+const dbName = 'tochi';
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.PROD_MONGODB, function (err, database) {
@@ -59,9 +63,10 @@ mongodb.MongoClient.connect(process.env.PROD_MONGODB, function (err, database) {
   }
  
   // Save database object from the callback for reuse.
-  db = database;
-  console.log("Database connection ready");
-
+ console.log("Database connection ready");
+  db02 = database;
+  console.log("Database connection ready 02");
+  db = database.db(dbName);
   // Initialize the app.
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
