@@ -1,1 +1,1 @@
-web: node indexcotiza.js 
+web: node indexcotizaALL.js
