@@ -26,6 +26,10 @@ var BANWIRE_COTIZACIONES_BITACORA_COLLECTION = "banwirebitacoras";
 var BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION = "banwirebitacorasdescuento";
 var BANWIRE_USUARIOS_COLLECTION = "banwireusuarios";
 
+var YOUTOCHI_DATA_SOURCES_COLLECTION = "youtochidatasource";
+
+
+
 
 //to use the api get/post for POS sale store
 var POS_PAIS = "storesales_coountry";
@@ -1544,6 +1548,33 @@ app.get("/banwireapi/bitacorasdescuento", function(req, res) {
     }
   });
 });
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////77
+//////////// YOUTOCHI  data sources
+//////////////////////////////////////////////////////////////////////777
+//    YOUTOCHI_DATA_SOURCE
+//////////////////////////luna
+
+
+/*  "/youtochi/datasources"
+ *    GET: finds all dta sources
+ *    POST: 
+ */
+
+app.get("/youtochi/datasources", function(req, res) {
+  db.collection(YOUTOCHI_DATA_SOURCES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener data sources.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
 
 
 
