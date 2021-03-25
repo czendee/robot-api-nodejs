@@ -44,6 +44,16 @@ var PAY_ISSUER_LOYALTYCARD = "loyal_IssuerBank_LoyaltyCard";
 
 var app = express();
 
+// Configurar cabeceras y cors
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
+
 //2020 august : user story 1 : token security
 // 1
 app.set('llave', config.llave);
