@@ -76,7 +76,7 @@ mongodb.MongoClient.connect(process.env.PROD_MONGODB, function (err, database) {
     process.exit(1);
   }
  
-  // Save database object from the callback for reuse.
+  // Save database object from the callback for reuse....w
  console.log("Database connection ready");
   db02 = database;
   console.log("Database connection ready 02");
