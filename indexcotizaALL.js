@@ -27,6 +27,8 @@ var BANWIRE_COTIZACIONES_BITACORA_DESCUENTO_COLLECTION = "banwirebitacorasdescue
 var BANWIRE_USUARIOS_COLLECTION = "banwireusuarios";
 
 var YOUTOCHI_DATA_SOURCES_COLLECTION = "youtochidatasource";
+var YOUTOCHI_DATA_TOOLS_COLLECTION = "youtochidatatool";
+var YOUTOCHI_DATA_FLOWS_COLLECTION = "youtochidataflow";
 
 
 
@@ -1584,6 +1586,39 @@ app.get("/youtochi/datasources", function(req, res) {
     }
   });
 });
+
+/*  "/youtochi/datatool"
+ *    GET: finds all dta tool
+ *    POST: 
+ */
+
+app.get("/youtochi/datatools", function(req, res) {
+  db.collection(YOUTOCHI_DATA_TOOLS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener data tools.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
+/*  "/youtochi/dataflows"
+ *    GET: finds all dta flows
+ *    POST: 
+ */
+
+app.get("/youtochi/dataflows", function(req, res) {
+  db.collection(YOUTOCHI_DATA_FLOWS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Fallo obtener data flows.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
 
 
 
