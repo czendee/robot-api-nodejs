@@ -5,9 +5,9 @@
   "engines": {
     "node": "8.9.1"
   }, 
-  "main": "server.js",
+  "main": "indexcotizaALL.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node indexcotizaALL.js",
     "test": "node test.js"
   },
   "dependencies": {
