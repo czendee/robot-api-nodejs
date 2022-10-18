@@ -2,6 +2,17 @@
 # mirar el wiki for lista de API
 
 
+========
+##Render.com
+
+☁️ Deploy from Render.com in the dashboard using czendeQhotmail.com use github czendee
+youtochi public aPi to get notes to redis list
+REnder.com will automatically setup an environment and run an instance for you. 
+https://apicito.onrender.com This deploy uses to start node indexcotizaALL.js
+
+
+========
+## gitpod.io
 
 #nodejs api intiial
 #this repository will be deployed to gitpod.io
