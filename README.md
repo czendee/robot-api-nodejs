@@ -10,6 +10,10 @@ youtochi public aPi to get notes to redis list
 REnder.com will automatically setup an environment and run an instance for you. 
 https://apicito.onrender.com This deploy uses to start node indexcotizaALL.js
 
+Example https://apicito.onrender.com/api/robots
+Example https://apicito.onrender.com/banwireapi/cotizaciones
+
+
 
 ========
 ## gitpod.io
